@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { cn } from '@/lib/utils';
 
 interface ActionButtonProps {
   children: React.ReactNode;
@@ -7,6 +8,7 @@ interface ActionButtonProps {
   disabled?: boolean;
   icon?: React.ReactNode;
   secondary?: boolean;
+  className?: string;
 }
 
 const ActionButton: React.FC<ActionButtonProps> = ({ 
@@ -14,23 +16,23 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   onClick, 
   disabled = false,
   icon,
-  secondary = false
+  secondary = false,
+  className
 }) => {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`
-        flex items-center justify-center gap-1.5 py-2 px-4 rounded-md 
-        transition-all duration-300 font-medium text-sm
-        ${disabled ? 'opacity-50 cursor-not-allowed' : 'active:scale-97 hover:shadow-md'}
+      className={cn(`
+        flex items-center justify-center gap-1.5 py-3 px-6 rounded-md 
+        transition-all duration-300 font-medium text-base
+        ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl active:scale-95'}
         ${secondary 
           ? 'bg-secondary/80 hover:bg-secondary text-foreground' 
-          : 'glass-button'
-        }
-      `}
+          : 'bg-blue-500/90 hover:bg-blue-600/90 backdrop-blur-sm text-white shadow-md hover:shadow-blue-500/20'}
+        `, className)}
     >
-      {icon && <span className="w-4 h-4">{icon}</span>}
+      {icon && <span className="w-5 h-5">{icon}</span>}
       {children}
     </button>
   );
